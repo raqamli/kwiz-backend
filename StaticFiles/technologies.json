@@ -1,0 +1,746 @@
+[
+    {
+        "type": "Framework",
+        "name": "Django",
+        "description": "Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.",
+        "tags": ["Python", "Web", "MVC"]
+    },
+    {
+        "type": "Framework",
+        "name": "Ruby on Rails",
+        "description": "Ruby on Rails is a web application framework written in Ruby that follows the Model-View-Controller (MVC) architectural pattern.",
+        "tags": ["Ruby", "Web", "MVC"]
+    },
+    {
+        "type": "Framework",
+        "name": "Angular",
+        "description": "Angular is a platform and framework for building client-side applications using TypeScript and the Model-View-Controller (MVC) pattern.",
+        "tags": ["TypeScript", "Web", "Frontend", "MVC"]
+    },
+    {
+        "type": "Framework",
+        "name": "React",
+        "description": "React is a JavaScript library for building user interfaces, particularly single-page applications.",
+        "tags": ["JavaScript", "Web", "Frontend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Vue.js",
+        "description": "Vue.js is a progressive JavaScript framework for building user interfaces, designed to be incrementally adoptable.",
+        "tags": ["JavaScript", "Web", "Frontend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Spring",
+        "description": "Spring is a Java framework that provides comprehensive infrastructure support for building Java applications.",
+        "tags": ["Java", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": ".NET Core",
+        "description": ".NET Core is an open-source, cross-platform framework for building modern, cloud-based, and internet-connected applications.",
+        "tags": [".NET", "C#", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Express.js",
+        "description": "Express.js is a fast, unopinionated, minimalist web framework for Node.js, designed for building web applications and APIs.",
+        "tags": ["JavaScript", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Flask",
+        "description": "Flask is a lightweight Python web framework that's easy to use and designed to make getting started quick and easy.",
+        "tags": ["Python", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Laravel",
+        "description": "Laravel is a PHP web application framework known for its elegant syntax and features like routing, authentication, and caching.",
+        "tags": ["PHP", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Symfony",
+        "description": "Symfony is a set of reusable PHP components and a web application framework that follows the Model-View-Controller (MVC) pattern.",
+        "tags": ["PHP", "Web", "Backend", "MVC"]
+    },
+    {
+        "type": "Framework",
+        "name": "ASP.NET",
+        "description": "ASP.NET is a web framework developed by Microsoft for building dynamic web applications, web services, and websites.",
+        "tags": ["C#", ".NET", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Ember.js",
+        "description": "Ember.js is a JavaScript framework for building ambitious web applications that handles the boilerplate and provides conventions.",
+        "tags": ["JavaScript", "Web", "Frontend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Qt",
+        "description": "Qt is a C++ framework for developing cross-platform applications, including user interfaces and device-specific features.",
+        "tags": ["C++", "Desktop"]
+    },
+    {
+        "type": "Framework",
+        "name": "TensorFlow",
+        "description": "TensorFlow is an open-source machine learning framework developed by Google for building and training neural network models.",
+        "tags": ["Python", "Machine Learning", "AI"]
+    },
+    {
+        "type": "Framework",
+        "name": "PyTorch",
+        "description": "PyTorch is an open-source machine learning framework that provides a flexible, dynamic approach to building and training models.",
+        "tags": ["Python", "Machine Learning", "AI"]
+    },
+    {
+        "type": "Framework",
+        "name": "Ionic",
+        "description": "Ionic is a popular open-source framework for building cross-platform mobile applications using web technologies like HTML, CSS, and JavaScript.",
+        "tags": ["JavaScript", "Mobile"]
+    },
+    {
+        "type": "Framework",
+        "name": "RubyMotion",
+        "description": "RubyMotion is a framework for building native applications on iOS, Android, macOS, and more using the Ruby programming language.",
+        "tags": ["Ruby", "Mobile"]
+    },
+    {
+        "type": "Framework",
+        "name": "Meteor",
+        "description": "Meteor is a full-stack JavaScript framework for building real-time web applications, including both the front-end and back-end.",
+        "tags": ["JavaScript", "Web", "Full-Stack"]
+    },
+    {
+        "type": "Framework",
+        "name": "Django REST framework",
+        "description": "Django REST framework is a powerful toolkit for building Web APIs in Django applications.",
+        "tags": ["Python", "Web", "API"]
+    },
+    {
+        "type": "Framework",
+        "name": "NestJS",
+        "description": "NestJS is a TypeScript-based Node.js framework for building efficient and scalable server-side applications.",
+        "tags": ["TypeScript", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Ruby Grape",
+        "description": "Ruby Grape is a micro-framework for creating REST-like APIs in Ruby.",
+        "tags": ["Ruby", "Web", "API"]
+    },
+    {
+        "type": "Framework",
+        "name": "ASP.NET Core",
+        "description": "ASP.NET Core is the cross-platform version of ASP.NET, suitable for building modern web applications and APIs.",
+        "tags": ["C#", ".NET", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Koa",
+        "description": "Koa is a modern web framework for Node.js that aims to be smaller, more expressive, and more robust.",
+        "tags": ["JavaScript", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Slim",
+        "description": "Slim is a PHP micro framework that's ideal for building simple, yet powerful web applications and APIs.",
+        "tags": ["PHP", "Web", "Backend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Feathers",
+        "description": "Feathers is a web framework for building real-time applications using JavaScript or TypeScript across various platforms.",
+        "tags": ["JavaScript", "Web", "Real-Time"]
+    },
+    {
+        "type": "Framework",
+        "name": "Sails.js",
+        "description": "Sails.js is a full-featured MVC framework for building web applications and APIs using Node.js.",
+        "tags": ["JavaScript", "Web", "Full-Stack", "MVC"]
+    },
+    {
+        "type": "Framework",
+        "name": "Phoenix",
+        "description": "Phoenix is a web framework for building real-time, fault-tolerant, and distributed systems using Elixir.",
+        "tags": ["Elixir", "Web", "Real-Time"]
+    },
+    {
+        "type": "Framework",
+        "name": "Nuxt.js",
+        "description": "Nuxt.js is a higher-level framework built on top of Vue.js, designed for creating universal and single page applications.",
+        "tags": ["Vue.js", "JavaScript", "Web", "Frontend"]
+    },
+    {
+        "type": "Framework",
+        "name": "Quasar Framework",
+        "description": "Quasar Framework is a high-performance, responsive design framework for building websites, mobile apps, and Electron apps using Vue.js.",
+        "tags": ["Vue.js", "JavaScript", "Web", "Mobile"]
+    },
+{
+        "type": "Programming Language",
+        "name": "Python",
+        "description": "Python is an interpreted, high-level and general-purpose programming language.",
+        "tags": ["Python", "General Purpose", "Interpreted"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Java",
+        "description": "Java is a general-purpose programming language that is class-based, object-oriented, and designed to have as few implementation dependencies as possible.",
+        "tags": ["Java", "General Purpose", "Object-Oriented"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "C",
+        "description": "C is a general-purpose, procedural computer programming language supporting structured programming, lexical variable scope, and recursion, with a static type system.",
+        "tags": ["C", "Procedural", "Low-Level"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "C++",
+        "description": "C++ is a general-purpose programming language created as an extension of the C programming language, providing object-oriented and generic programming features.",
+        "tags": ["C++", "Object-Oriented", "Systems"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "C#",
+        "description": "C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines.",
+        "tags": ["C#", "General Purpose", "Object-Oriented"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "JavaScript",
+        "description": "JavaScript is a high-level, interpreted scripting language used to create dynamic and interactive websites.",
+        "tags": ["JavaScript", "Web", "Scripting"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Ruby",
+        "description": "Ruby is a dynamic, interpreted, reflective, object-oriented, general-purpose programming language.",
+        "tags": ["Ruby", "General Purpose", "Dynamic"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Swift",
+        "description": "Swift is a general-purpose, multi-paradigm programming language developed by Apple Inc. for iOS, iPadOS, macOS, watchOS, tvOS, and Linux.",
+        "tags": ["Swift", "Multi-Paradigm", "iOS"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Kotlin",
+        "description": "Kotlin is a statically typed programming language that runs on the Java Virtual Machine and also can be compiled to JavaScript source code or uses the LLVM compiler infrastructure.",
+        "tags": ["Kotlin", "Static Typing", "JVM"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "PHP",
+        "description": "PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language.",
+        "tags": ["PHP", "Web", "Scripting"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Go",
+        "description": "Go (also known as Golang) is an open-source programming language created by Google. It is statically typed, compiled, and focuses on simplicity and efficiency.",
+        "tags": ["Go", "Static Typing", "Efficiency"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Rust",
+        "description": "Rust is a systems programming language that aims to provide the speed of C and C++ while also focusing on memory safety and thread safety.",
+        "tags": ["Rust", "Systems", "Memory Safety"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Perl",
+        "description": "Perl is a high-level, general-purpose, interpreted, dynamic programming language.",
+        "tags": ["Perl", "General Purpose", "Scripting"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Haskell",
+        "description": "Haskell is a functional programming language that emphasizes a concise, declarative coding style.",
+        "tags": ["Haskell", "Functional", "Concise"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Scala",
+        "description": "Scala is a general-purpose programming language that integrates functional and object-oriented programming.",
+        "tags": ["Scala", "General Purpose", "Functional"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "R",
+        "description": "R is a programming language and free software environment used for statistical computing and graphics.",
+        "tags": ["R", "Statistical Computing", "Data Analysis"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Lua",
+        "description": "Lua is a lightweight, high-level, multi-paradigm programming language designed primarily for embedded systems and games.",
+        "tags": ["Lua", "Embedded Systems", "Scripting"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "TypeScript",
+        "description": "TypeScript is a strict syntactical superset of JavaScript that adds optional static typing, interfaces, and other advanced features.",
+        "tags": ["TypeScript", "JavaScript", "Static Typing"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Julia",
+        "description": "Julia is a high-level, high-performance programming language for technical computing, with syntax that is familiar to users of other technical computing environments.",
+        "tags": ["Julia", "Technical Computing", "Performance"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Dart",
+        "description": "Dart is a programming language designed for building web, server, and mobile applications.",
+        "tags": ["Dart", "Web", "Mobile"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Cobol",
+        "description": "COBOL is a compiled English-like computer programming language designed for business use.",
+        "tags": ["COBOL", "Business", "Compiled"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Erlang",
+        "description": "Erlang is a general-purpose, concurrent, functional programming language used primarily in telecommunications and other high-availability systems.",
+        "tags": ["Erlang", "Concurrent", "Functional"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Groovy",
+        "description": "Groovy is a dynamic programming language that runs on the Java Virtual Machine and can be used as both a programming language and a scripting language.",
+        "tags": ["Groovy", "Dynamic", "JVM"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Haxe",
+        "description": "Haxe is a high-level, open-source programming language that can be compiled to various target languages, including JavaScript, C++, and more.",
+        "tags": ["Haxe", "High-Level", "Cross-Compilation"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Io",
+        "description": "Io is a small, prototype-based programming language inspired by Smalltalk, Lisp, and other languages.",
+        "tags": ["Io", "Prototype-Based", "Small"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "J",
+        "description": "J is a high-level, interpreted programming language, primarily used for mathematical and statistical analysis.",
+        "tags": ["J", "Mathematical", "Interpreted"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Maxima",
+        "description": "Maxima is a computer algebra system based on a 1982 version of Macsyma.",
+        "tags": ["Maxima", "Algebra", "Mathematics"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "ML",
+        "description": "ML is a general-purpose functional programming language developed by Robin Milner and others in the early 1970s.",
+        "tags": ["ML", "Functional", "General Purpose"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Nim",
+        "description": "Nim is a statically typed, imperative programming language that focuses on performance, portability, and expressiveness.",
+        "tags": ["Nim", "Statically Typed", "Performance"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Objective-C",
+        "description": "Objective-C is a general-purpose, object-oriented programming language used by Apple for the macOS and iOS operating systems.",
+        "tags": ["Objective-C", "Object-Oriented", "Apple"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "OCaml",
+        "description": "OCaml is a general-purpose, functional, and imperative programming language.",
+        "tags": ["OCaml", "Functional", "General Purpose"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Pascal",
+        "description": "Pascal is an influential imperative and procedural programming language, designed in the late 1960s as a small and efficient language intended to encourage good programming practices.",
+        "tags": ["Pascal", "Imperative", "Efficient"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "PL/I",
+        "description": "PL/I is a procedural, imperative computer programming language designed for scientific, engineering, business, and systems programming applications.",
+        "tags": ["PL/I", "Procedural", "Scientific"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "PostScript",
+        "description": "PostScript is a page description language and programming language used primarily in the electronic and desktop publishing areas.",
+        "tags": ["PostScript", "Page Description", "Publishing"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "PowerShell",
+        "description": "PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.",
+        "tags": ["PowerShell", "Automation", "Microsoft"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "PureScript",
+        "description": "PureScript is a strongly-typed functional programming language that compiles to JavaScript.",
+        "tags": ["PureScript", "Functional", "TypeScript"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "REXX",
+        "description": "REXX is an interpreted language that is used primarily for text processing.",
+        "tags": ["REXX", "Interpreted", "Text Processing"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Ring",
+        "description": "Ring is a dynamic and general-purpose programming language that is designed to be simple and easy to learn.",
+        "tags": ["Ring", "General Purpose", "Dynamic"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "SAS",
+        "description": "SAS is a software suite used for advanced analytics, business intelligence, and data management.",
+        "tags": ["SAS", "Analytics", "Data Management"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Scratch",
+        "description": "Scratch is a visual programming language and online community where users can create their own interactive stories, games, and animations.",
+        "tags": ["Scratch", "Visual", "Education"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Tcl",
+        "description": "Tcl is a high-level, dynamic programming language often used for rapid prototyping and scripting.",
+        "tags": ["Tcl", "Scripting", "Dynamic"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Turing",
+        "description": "Turing is a Pascal-like programming language developed for teaching programming concepts to beginners.",
+        "tags": ["Turing", "Education", "Teaching"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Vim script",
+        "description": "Vim script is a scripting language used for customizing and extending the Vim text editor.",
+        "tags": ["Vim", "Scripting", "Text Editor"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Visual Basic",
+        "description": "Visual Basic is a third-generation event-driven programming language from Microsoft.",
+        "tags": ["Visual Basic", "Microsoft", "Event-Driven"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "X10",
+        "description": "X10 is a high-level programming language that is designed for high-performance, high-productivity computing.",
+        "tags": ["X10", "High-Performance", "Concurrent"]
+    },
+    {
+        "type": "Programming Language",
+        "name": "Zig",
+        "description": "Zig is a general-purpose programming language designed for robustness, optimality, and maintainability.",
+        "tags": ["Zig", "General Purpose", "Robust"]
+    },
+{
+        "type": "Tool",
+        "name": "Visual Studio Code",
+        "description": "Visual Studio Code is a free source-code editor made by Microsoft for Windows, Linux, and macOS.",
+        "tags": ["IDE", "Editor", "Microsoft"]
+    },
+    {
+        "type": "Tool",
+        "name": "IntelliJ IDEA",
+        "description": "IntelliJ IDEA is a powerful Java integrated development environment (IDE) for developing computer software.",
+        "tags": ["IDE", "Java", "JetBrains"]
+    },
+    {
+        "type": "Tool",
+        "name": "Eclipse",
+        "description": "Eclipse is an integrated development environment (IDE) used in computer programming.",
+        "tags": ["IDE", "Java", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "PyCharm",
+        "description": "PyCharm is an integrated development environment (IDE) used in computer programming for Python language.",
+        "tags": ["IDE", "Python", "JetBrains"]
+    },
+    {
+        "type": "Tool",
+        "name": "Sublime Text",
+        "description": "Sublime Text is a proprietary cross-platform source code editor with a Python application programming interface (API).",
+        "tags": ["Editor", "Text Editor", "Proprietary"]
+    },
+    {
+        "type": "Tool",
+        "name": "Atom",
+        "description": "Atom is a free and open-source text and source code editor for macOS, Linux, and Microsoft Windows.",
+        "tags": ["Editor", "Text Editor", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "Visual Studio",
+        "description": "Visual Studio is an integrated development environment (IDE) developed by Microsoft.",
+        "tags": ["IDE", "Microsoft", "Windows"]
+    },
+    {
+        "type": "Tool",
+        "name": "NetBeans",
+        "description": "NetBeans is an integrated development environment (IDE) for Java. It supports development of all Java application types.",
+        "tags": ["IDE", "Java", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "Xcode",
+        "description": "Xcode is an integrated development environment (IDE) for macOS containing a suite of software development tools.",
+        "tags": ["IDE", "Apple", "macOS"]
+    },
+    {
+        "type": "Tool",
+        "name": "Android Studio",
+        "description": "Android Studio is the official integrated development environment (IDE) for Android application development.",
+        "tags": ["IDE", "Android", "Google"]
+    },
+    {
+        "type": "Tool",
+        "name": "Git",
+        "description": "Git is a distributed version control system for tracking changes in source code during software development.",
+        "tags": ["Version Control", "Git", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "GitHub",
+        "description": "GitHub is a web-based platform for version control and collaboration using Git.",
+        "tags": ["Version Control", "Collaboration", "Web"]
+    },
+    {
+        "type": "Tool",
+        "name": "Jupyter Notebook",
+        "description": "Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.",
+        "tags": ["Notebook", "Python", "Data Science"]
+    },
+    {
+        "type": "Tool",
+        "name": "Docker",
+        "description": "Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.",
+        "tags": ["Containerization", "Virtualization", "DevOps"]
+    },
+    {
+        "type": "Tool",
+        "name": "Postman",
+        "description": "Postman is a collaboration platform for API development that simplifies the process of developing APIs that allow software to communicate.",
+        "tags": ["API Development", "Testing", "Collaboration"]
+    },
+    {
+        "type": "Tool",
+        "name": "Webpack",
+        "description": "Webpack is an open-source JavaScript module bundler. It takes modules with dependencies and generates static assets representing those modules.",
+        "tags": ["Module Bundler", "JavaScript", "Build Tool"]
+    },
+    {
+        "type": "Tool",
+        "name": "npm",
+        "description": "npm is a package manager for the JavaScript programming language.",
+        "tags": ["Package Manager", "JavaScript", "Node.js"]
+    },
+    {
+        "type": "Tool",
+        "name": "Selenium",
+        "description": "Selenium is a portable framework for testing web applications. Selenium provides a playback tool for authoring functional tests.",
+        "tags": ["Testing", "Web", "Automated Testing"]
+    },
+    {
+        "type": "Tool",
+        "name": "Visual Studio Online",
+        "description": "Visual Studio Online is a web-based integrated development environment (IDE) for software developers.",
+        "tags": ["IDE", "Microsoft", "Web"]
+    },
+    {
+        "type": "Tool",
+        "name": "CMake",
+        "description": "CMake is an open-source, cross-platform family of tools designed to build, test, and package software.",
+        "tags": ["Build Tool", "Cross-Platform", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "JIRA",
+        "description": "JIRA is a proprietary issue tracking product developed by Atlassian that allows bug tracking and agile project management.",
+        "tags": ["Project Management", "Issue Tracking", "Atlassian"]
+    },
+    {
+        "type": "Tool",
+        "name": "Confluence",
+        "description": "Confluence is a web-based corporate wiki application developed by Atlassian.",
+        "tags": ["Collaboration", "Wiki", "Atlassian"]
+    },
+    {
+        "type": "Tool",
+        "name": "Slack",
+        "description": "Slack is a proprietary business communication platform that offers many IRC-style features.",
+        "tags": ["Communication", "Collaboration", "Messaging"]
+    },
+    {
+        "type": "Tool",
+        "name": "Trello",
+        "description": "Trello is a web-based list-making application originally made by Fog Creek Software in 2011, that was spun out to form the basis of a separate company in 2014.",
+        "tags": ["Project Management", "Agile", "Productivity"]
+    },
+    {
+        "type": "Tool",
+        "name": "Vagrant",
+        "description": "Vagrant is an open-source software product for building and maintaining portable virtual software development environments.",
+        "tags": ["Virtualization", "Development Environment", "Open Source"]
+    },
+    {
+        "type": "Tool",
+        "name": "Ansible",
+        "description": "Ansible is an open-source automation tool that automates software provisioning, configuration management, and application deployment.",
+        "tags": ["Automation", "Configuration Management", "DevOps"]
+    },
+{
+        "type": "Concept",
+        "name": "Version Control",
+        "description": "Version control is a system that records changes to a file or set of files over time, so that you can recall specific versions later.",
+        "tags": ["Version Control", "Collaboration", "History"]
+    },
+    {
+        "type": "Concept",
+        "name": "Agile",
+        "description": "Agile is an iterative approach to software development that emphasizes flexibility, collaboration, and customer feedback.",
+        "tags": ["Agile", "Methodology", "Iterations"]
+    },
+    {
+        "type": "Concept",
+        "name": "DevOps",
+        "description": "DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the software development life cycle and improve deployment frequency.",
+        "tags": ["DevOps", "Collaboration", "Automation"]
+    },
+    {
+        "type": "Concept",
+        "name": "Algorithm",
+        "description": "An algorithm is a step-by-step procedure or formula for solving a problem or accomplishing a task.",
+        "tags": ["Algorithm", "Problem Solving", "Procedure"]
+    },
+    {
+        "type": "Concept",
+        "name": "Data Structure",
+        "description": "A data structure is a way of organizing and storing data in a computer so that it can be used efficiently.",
+        "tags": ["Data Structure", "Organization", "Efficiency"]
+    },
+    {
+        "type": "Concept",
+        "name": "API",
+        "description": "An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other.",
+        "tags": ["API", "Communication", "Integration"]
+    },
+    {
+        "type": "Concept",
+        "name": "Database",
+        "description": "A database is an organized collection of structured information, or data, typically stored electronically in a computer system.",
+        "tags": ["Database", "Data Storage", "Structured"]
+    },
+    {
+        "type": "Concept",
+        "name": "Cloud Computing",
+        "description": "Cloud computing is the delivery of computing services—servers, storage, databases, networking, software, over the Cloud (Internet).",
+        "tags": ["Cloud Computing", "Services", "Internet"]
+    },
+    {
+        "type": "Concept",
+        "name": "Machine Learning",
+        "description": "Machine learning is a subset of artificial intelligence that involves training computers to learn from data and improve their performance over time.",
+        "tags": ["Machine Learning", "Artificial Intelligence", "Data"]
+    },
+    {
+        "type": "Concept",
+        "name": "Artificial Intelligence",
+        "description": "Artificial intelligence (AI) is the simulation of human intelligence in machines that are capable of performing tasks that typically require human intelligence.",
+        "tags": ["Artificial Intelligence", "Simulation", "Automation"]
+    },
+    {
+        "type": "Concept",
+        "name": "Big Data",
+        "description": "Big data refers to extremely large datasets that may be analyzed computationally to reveal patterns, trends, and associations.",
+        "tags": ["Big Data", "Data Analysis", "Patterns"]
+    },
+    {
+        "type": "Concept",
+        "name": "Cybersecurity",
+        "description": "Cybersecurity is the practice of protecting computer systems, networks, and data from theft, damage, or unauthorized access.",
+        "tags": ["Cybersecurity", "Protection", "Networks"]
+    },
+    {
+        "type": "Concept",
+        "name": "Code Review",
+        "description": "Code review is a systematic examination of computer source code. It is intended to find mistakes overlooked in initial development.",
+        "tags": ["Code Review", "Quality Assurance", "Collaboration"]
+    },
+    {
+        "type": "Concept",
+        "name": "Code Refactoring",
+        "description": "Code refactoring is the process of restructuring existing computer code without changing its external behavior.",
+        "tags": ["Code Refactoring", "Code Improvement", "Restructuring"]
+    },
+    {
+        "type": "Concept",
+        "name": "Continuous Integration",
+        "description": "Continuous Integration (CI) is a software development practice where code changes are automatically built, tested, and integrated into the shared repository.",
+        "tags": ["Continuous Integration", "Automation", "Testing"]
+    },
+    {
+        "type": "Concept",
+        "name": "Continuous Deployment",
+        "description": "Continuous Deployment is a software development practice where every code change that passes automated testing is automatically deployed to production.",
+        "tags": ["Continuous Deployment", "Automation", "Production"]
+    },
+    {
+        "type": "Concept",
+        "name": "Code Quality",
+        "description": "Code quality refers to the overall robustness, maintainability, readability, and performance of a software codebase.",
+        "tags": ["Code Quality", "Robustness", "Maintainability"]
+    },
+    {
+        "type": "Concept",
+        "name": "Unit Testing",
+        "description": "Unit testing is a software testing method where individual units or components of a software are tested in isolation.",
+        "tags": ["Unit Testing", "Testing", "Components"]
+    },
+    {
+        "type": "Concept",
+        "name": "Continuous Monitoring",
+        "description": "Continuous monitoring involves the regular collection and analysis of data to evaluate the performance and security of a system.",
+        "tags": ["Continuous Monitoring", "Performance", "Security"]
+    },
+    {
+        "type": "Concept",
+        "name": "Responsive Design",
+        "description": "Responsive design is an approach to web design that makes web pages render well on a variety of devices and window or screen sizes.",
+        "tags": ["Responsive Design", "Web", "User Experience"]
+    },
+    {
+        "type": "Concept",
+        "name": "User Experience (UX)",
+        "description": "User Experience (UX) refers to a person's emotions and attitudes about using a particular product, system, or service.",
+        "tags": ["User Experience", "Design", "Emotions"]
+    },
+    {
+        "type": "Concept",
+        "name": "User Interface (UI)",
+        "description": "User Interface (UI) encompasses the visual elements, controls, and layouts through which a user interacts with a software or hardware.",
+        "tags": ["User Interface", "Design", "Interactions"]
+    }
+]
