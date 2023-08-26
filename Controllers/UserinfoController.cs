@@ -11,24 +11,18 @@ namespace X.Kwiz.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class UserinfoController : ControllerBase
 {
-    private readonly IKwizDbContext dbContext;
-    public UserinfoController(
-        IKwizDbContext dbContext
-    )
-    {
-        this.dbContext = dbContext;
-    }
     [Authorize]
     [HttpGet("interests")]
-    public async Task<IActionResult> GetInterest(CancellationToken cancellationToken = default)
+    public async Task<IActionResult> GetInterest(
+        [FromServices] IKwizDbContext dbContext,
+        CancellationToken cancellationToken = default)
     {
         var userClaims = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (string.IsNullOrEmpty(userClaims))
-            return Unauthorized();
-        Console.WriteLine(userClaims);
-        var interests = await dbContext.TechInterests
-                                .FirstOrDefaultAsync(t => t.UserId.ToString() == userClaims, cancellationToken);
+        var userId = Guid.Parse(idCliam);
+        var interests = await dbContext.TechInterests.FirstOrDefaultAsync(t => t.UserId == userId, 
+                                                    cancellationToken);
         if (interests is null)
             return NotFound();
 
@@ -37,16 +31,17 @@ public class UserinfoController : ControllerBase
     [Authorize]
     [HttpPost("interests")]
     public async Task<IActionResult> CreateInterest(
+        [FromServices] IKwizDbContext dbContext,
         [FromBody] CreateTechInterestDto createTechInterest,
         CancellationToken cancellationToken = default)
     {
         var userClaims = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        if (string.IsNullOrEmpty(userClaims))
-            return Unauthorized();
-
-        var interests = await dbContext.TechInterests
-                                .FirstOrDefaultAsync(t => t.UserId.ToString() == userClaims, cancellationToken);
+        var userId = Guid.Parse(idCliam);
+        var interests = await dbContext.TechInterests.FirstOrDefaultAsync(t => t.UserId == userId, 
+                                                    cancellationToken);
+        
         if (interests is null)
             return BadRequest("User has interests.");
 

@@ -10,12 +10,9 @@ public class KwizDbContext : DbContext, IKwizDbContext
         : base(options) { }
 
     public DbSet<TechInterest> TechInterests { get; set; }
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-    }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         SetDates();
