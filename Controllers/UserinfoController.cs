@@ -72,7 +72,7 @@ public class UserinfoController : ControllerBase
         var interests = await dbContext.TechInterests
             .FirstOrDefaultAsync(t => t.UserId == userId, cancellationToken);
 
-        var updateInterests = dbContext.TechInterests.Add(new TechInterest
+        var updateInterests = dbContext.TechInterests.Update(new TechInterest
         {
             Interests = userSelectedInterests.ToArray()
         });
