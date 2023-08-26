@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using X.Kwiz.Api.Entities;
 
 namespace X.Kwiz.Api.Data;
@@ -7,7 +8,10 @@ namespace X.Kwiz.Api.Data;
 public class KwizDbContext : DbContext, IKwizDbContext
 {
     public KwizDbContext(DbContextOptions<KwizDbContext> options)
-        : base(options) { }
+        : base(options)
+    {
+        ChangeTracker.StateChanged += OnStateChanged;
+    }
 
     public DbSet<TechInterest> TechInterests { get; set; }
 
@@ -15,24 +19,33 @@ public class KwizDbContext : DbContext, IKwizDbContext
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        SetDates();
+        UpdateDates(ChangeTracker.Entries<IHasTime>().Where(e => e.State == EntityState.Modified));
         return base.SaveChangesAsync(cancellationToken);
     }
 
-    private void SetDates()
+    private void OnStateChanged(object sender, EntityStateChangedEventArgs e)
     {
-        foreach (var entry in ChangeTracker.Entries<IHasTime>())
-        {
-            if (entry.State == EntityState.Added)
-            {
-                entry.Entity.CreatedAt = DateTime.UtcNow;
-                entry.Entity.UpdatedAt = DateTime.UtcNow;
-            }
+        if (e.Entry.Entity is IHasTime hasTimestamp)
+            if (e.NewState == EntityState.Added)
+                hasTimestamp.CreatedAt = DateTime.UtcNow;
+            else if (e.NewState == EntityState.Modified)
+                hasTimestamp.UpdatedAt = DateTime.UtcNow;
 
-            if (entry.State == EntityState.Modified)
-            {
-                entry.Entity.UpdatedAt = DateTime.UtcNow;
-            }
+        if (e.Entry.Entity is IHasTime timeStamp)
+            if (e.NewState == EntityState.Added)
+                timeStamp.CreatedAt = DateTime.UtcNow;
+            else if (e.NewState == EntityState.Modified)
+                timeStamp.UpdatedAt = DateTime.UtcNow;
+    }
+
+    private void UpdateDates(IEnumerable<EntityEntry<IHasTime>> entries)
+    {
+        if (entries.Any() is false)
+            return;
+
+        foreach (var entry in entries)
+        {
+            entry.Entity.UpdatedAt = DateTime.UtcNow;
         }
     }
 }
