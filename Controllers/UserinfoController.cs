@@ -7,24 +7,24 @@ using X.Kwiz.Api.Dtos.TechInterestDto;
 using X.Kwiz.Api.Entities;
 
 namespace X.Kwiz.Api.Controllers;
+
 [ApiController]
 [Route("api/v1/[controller]")]
 public class UserinfoController : ControllerBase
 {
     [Authorize]
     [HttpGet("interests")]
-    public async Task<IActionResult> GetInterest(
+    public async Task<IActionResult> GetUserInterests(
         [FromServices] IKwizDbContext dbContext,
         CancellationToken cancellationToken = default)
     {
-        var userClaims = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
         var userId = Guid.Parse(idCliam);
-        var interests = await dbContext.TechInterests.FirstOrDefaultAsync(t => t.UserId == userId, 
-                                                    cancellationToken);
-        if (interests is null)
-            return NotFound();
+        var interests = await dbContext.TechInterests
+            .FirstOrDefaultAsync(t => t.UserId == userId, cancellationToken);
+        
+        if(interests is null)
+            return NoContent();
 
         return Ok(new GetTechInterestDto(interests));
     }
@@ -33,27 +33,27 @@ public class UserinfoController : ControllerBase
     [HttpPost("interests")]
     public async Task<IActionResult> CreateInterest(
         [FromServices] IKwizDbContext dbContext,
-        [FromBody] CreateTechInterestDto createTechInterest,
+        [FromBody] IEnumerable<string> userSelectedInterests,
         CancellationToken cancellationToken = default)
     {
-        var userClaims = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if(userSelectedInterests.Any() is false)
+            return BadRequest("User must select at least one interest.");
+
         var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
         var userId = Guid.Parse(idCliam);
-        var interests = await dbContext.TechInterests.FirstOrDefaultAsync(t => t.UserId == userId, 
-                                                    cancellationToken);
+        var interests = await dbContext.TechInterests
+            .FirstOrDefaultAsync(t => t.UserId == userId, cancellationToken);
         
-        if (interests is null)
-            return BadRequest("User has interests.");
+        if (interests is not null)
+            return Conflict("User already has tech interests selected.");
 
-        var interest = dbContext.TechInterests.Add(new TechInterest
+        var persistedInterests = dbContext.TechInterests.Add(new TechInterest
         {
-            UserId = Guid.Parse(userClaims),
-            Interests = createTechInterest.Interests
+            UserId = userId,
+            Interests = userSelectedInterests.ToArray()
         });
-
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return Ok(interest.Entity.UserId);
+        return CreatedAtAction(nameof(GetUserInterests), new GetTechInterestDto(persistedInterests.Entity));
     }
 }
