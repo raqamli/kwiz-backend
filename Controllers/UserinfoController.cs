@@ -28,6 +28,7 @@ public class UserinfoController : ControllerBase
 
         return Ok(new GetTechInterestDto(interests));
     }
+    
     [Authorize]
     [HttpPost("interests")]
     public async Task<IActionResult> CreateInterest(
