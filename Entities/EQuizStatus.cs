@@ -1,5 +1,5 @@
 namespace X.Kwiz.Api.Entities;
-public enum QuizStatus
+public enum EQuizStatus
 {
     Active,
     Disabled,
