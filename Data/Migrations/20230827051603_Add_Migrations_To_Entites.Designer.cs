@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using X.Kwiz.Api.Data;
@@ -11,9 +12,11 @@ using X.Kwiz.Api.Data;
 namespace kwiz_backend.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
-    partial class KwizDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230827051603_Add_Migrations_To_Entites")]
+    partial class Add_Migrations_To_Entites
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
