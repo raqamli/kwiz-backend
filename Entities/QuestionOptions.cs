@@ -8,4 +8,6 @@ public class QuestionOption
     public string Explanation { get; set; }
     public Guid QuestionId { get; set; }
     public QuizQuestion Question { get; set; }
+    public SubmissionSelection SubmissionSelection { get; set; }
+    public Guid SubmissionId { get; set; }
 }
