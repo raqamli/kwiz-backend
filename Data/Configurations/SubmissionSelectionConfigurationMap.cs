@@ -12,10 +12,6 @@ public class SubmissionSelectionConfigurationMap : IEntityTypeConfiguration<Subm
         builder.Property(b => b.IsSkipped).IsRequired();
         builder.Property(b => b.TimeSpentOnQuestion).IsRequired();
 
-        builder.Metadata
-            .FindNavigation(nameof(QuestionOption))
-            .SetPropertyAccessMode(PropertyAccessMode.Field);
-
         builder.HasMany(b => b.SelectedOptions)
             .WithOne(b => b.SubmissionSelection)
             .HasForeignKey(b => b.SubmissionId)

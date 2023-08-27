@@ -8,6 +8,7 @@ public class TechnologiesConfigurationMap : IEntityTypeConfiguration<Technologie
 {
     public void Configure(EntityTypeBuilder<Technologies> builder)
     {
+        builder.HasKey(b => b.Id);
         builder.Property(b => b.type).IsRequired();
         builder.Property(b => b.Name).IsRequired();
         builder.Property(b => b.Description).IsRequired();
