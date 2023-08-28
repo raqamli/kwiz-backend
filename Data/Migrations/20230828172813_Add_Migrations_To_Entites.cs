@@ -17,7 +17,7 @@ namespace kwiz_backend.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     OwnerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Title = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: false),
                     Description = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -26,7 +26,7 @@ namespace kwiz_backend.Data.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     IsPublic = table.Column<bool>(type: "boolean", nullable: false),
                     Tags = table.Column<string[]>(type: "text[]", nullable: true),
-                    Code = table.Column<string>(type: "text", nullable: false)
+                    Code = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,9 +54,9 @@ namespace kwiz_backend.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Type = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Type = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: false),
+                    Name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,7 +71,7 @@ namespace kwiz_backend.Data.Migrations
                     TimeLimitSeconds = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: false),
                     Tags = table.Column<string[]>(type: "text[]", nullable: true),
-                    QuizId = table.Column<Guid>(type: "uuid", nullable: true)
+                    QuizId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -80,7 +80,8 @@ namespace kwiz_backend.Data.Migrations
                         name: "FK_QuizQuestions_Quizzes_QuizId",
                         column: x => x.QuizId,
                         principalTable: "Quizzes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,12 +97,6 @@ namespace kwiz_backend.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SubmissionSelections", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SubmissionSelections_QuizQuestions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "QuizQuestions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SubmissionSelections_Submissions_SubmissionId",
                         column: x => x.SubmissionId,
@@ -155,11 +150,6 @@ namespace kwiz_backend.Data.Migrations
                 column: "QuizId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubmissionSelections_QuestionId",
-                table: "SubmissionSelections",
-                column: "QuestionId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SubmissionSelections_SubmissionId",
                 table: "SubmissionSelections",
                 column: "SubmissionId");
@@ -175,16 +165,16 @@ namespace kwiz_backend.Data.Migrations
                 name: "Technologies");
 
             migrationBuilder.DropTable(
-                name: "SubmissionSelections");
-
-            migrationBuilder.DropTable(
                 name: "QuizQuestions");
 
             migrationBuilder.DropTable(
-                name: "Submissions");
+                name: "SubmissionSelections");
 
             migrationBuilder.DropTable(
                 name: "Quizzes");
+
+            migrationBuilder.DropTable(
+                name: "Submissions");
         }
     }
 }

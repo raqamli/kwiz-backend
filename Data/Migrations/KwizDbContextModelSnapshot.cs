@@ -69,7 +69,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Code")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
@@ -97,8 +96,8 @@ namespace kwiz_backend.Data.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -119,7 +118,7 @@ namespace kwiz_backend.Data.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("character varying(1024)");
 
-                    b.Property<Guid?>("QuizId")
+                    b.Property<Guid>("QuizId")
                         .HasColumnType("uuid");
 
                     b.Property<string[]>("Tags")
@@ -181,8 +180,6 @@ namespace kwiz_backend.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuestionId");
-
                     b.HasIndex("SubmissionId");
 
                     b.ToTable("SubmissionSelections");
@@ -217,15 +214,18 @@ namespace kwiz_backend.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)");
 
                     b.HasKey("Id");
 
@@ -253,26 +253,22 @@ namespace kwiz_backend.Data.Migrations
 
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuizQuestion", b =>
                 {
-                    b.HasOne("X.Kwiz.Api.Entities.Quiz", null)
+                    b.HasOne("X.Kwiz.Api.Entities.Quiz", "Quiz")
                         .WithMany("Questions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("X.Kwiz.Api.Entities.SubmissionSelection", b =>
                 {
-                    b.HasOne("X.Kwiz.Api.Entities.QuizQuestion", "Question")
-                        .WithMany()
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("X.Kwiz.Api.Entities.Submission", "Submission")
                         .WithMany("Selections")
                         .HasForeignKey("SubmissionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Question");
 
                     b.Navigation("Submission");
                 });

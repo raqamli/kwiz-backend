@@ -7,6 +7,5 @@ public class SubmissionSelection
     public List<QuestionOption> SelectedOptions { get; set; }
     public bool IsSkipped { get; set; }
     public int TimeSpentOnQuestion { get; set; }
-    public QuizQuestion Question { get; set; }
     public Submission Submission { get; set; }
 }

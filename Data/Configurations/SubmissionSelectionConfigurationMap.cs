@@ -9,8 +9,6 @@ public class SubmissionSelectionConfigurationMap : IEntityTypeConfiguration<Subm
     public void Configure(EntityTypeBuilder<SubmissionSelection> builder)
     {
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.IsSkipped).IsRequired();
-        builder.Property(b => b.TimeSpentOnQuestion).IsRequired();
 
         builder.HasMany(b => b.SelectedOptions)
             .WithOne(b => b.SubmissionSelection)

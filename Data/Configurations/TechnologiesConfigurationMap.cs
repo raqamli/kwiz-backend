@@ -9,8 +9,8 @@ public class TechnologiesConfigurationMap : IEntityTypeConfiguration<Technologie
     public void Configure(EntityTypeBuilder<Technologies> builder)
     {
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Type).IsRequired();
-        builder.Property(b => b.Name).IsRequired();
-        builder.Property(b => b.Description).IsRequired();
+        builder.Property(b => b.Type).HasMaxLength(512).IsRequired();
+        builder.Property(b => b.Name).HasMaxLength(256).IsRequired();
+        builder.Property(b => b.Description).HasMaxLength(1024).IsRequired();
     }
 }

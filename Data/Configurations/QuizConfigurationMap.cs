@@ -9,12 +9,12 @@ public class QuizConfigurationMap : IEntityTypeConfiguration<Quiz>
     public void Configure(EntityTypeBuilder<Quiz> builder)
     {
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.Title).HasMaxLength(100).IsRequired();
+        builder.Property(b => b.Title).HasMaxLength(1024).IsRequired();
         builder.Property(b => b.Description).HasMaxLength(1024).IsRequired();
-        builder.Property(b => b.OpeningDateTime).IsRequired();
-        builder.Property(b => b.ClosingDateTime).IsRequired();
-        builder.Property(b => b.Status).IsRequired();
-        builder.Property(b => b.IsPublic).IsRequired();
-        builder.Property(b => b.Code).IsRequired();
+
+        builder.HasMany(b => b.Questions)
+            .WithOne(b => b.Quiz)
+            .HasForeignKey(b => b.QuizId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -9,7 +9,6 @@ public class QuizQuestionConfigurationMap : IEntityTypeConfiguration<QuizQuestio
     public void Configure(EntityTypeBuilder<QuizQuestion> builder)
     {
         builder.HasKey(b => b.Id);
-        builder.Property(b => b.TimeLimitSeconds).IsRequired();
         builder.Property(b => b.Content).HasMaxLength(1024).IsRequired();
     }
 }

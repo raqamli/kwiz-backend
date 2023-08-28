@@ -10,8 +10,6 @@ public class QuestionOptionsConfigurationMap : IEntityTypeConfiguration<Question
     {
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Content).HasMaxLength(1024).IsRequired();
-        builder.Property(b => b.IsCorrect).IsRequired();
-        builder.Property(b => b.IsRequired).IsRequired();
         builder.Property(b => b.Explanation).HasMaxLength(1024).IsRequired();
     }
 }
