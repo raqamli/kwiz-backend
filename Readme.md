@@ -36,6 +36,6 @@ services:
 #### docker continer run
 ```bash
 
-docker compose -f jaegertracing.yml up
+docker compose -f docker-jaegertracing.yml up
 
 ```
