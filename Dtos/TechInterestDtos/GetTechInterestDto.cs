@@ -1,7 +1,7 @@
 
-using X.Kwiz.Api.Entities;
+using Kwiz.Api.Entities;
 
-namespace X.Kwiz.Api.Dtos.TechInterestDto;
+namespace Kwiz.Api.Dtos.TechInterestDto;
 public class GetTechInterestDto
 {
     public GetTechInterestDto(TechInterest entity)

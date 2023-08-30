@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace X.Kwiz.Api.Controllers;
+namespace Kwiz.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

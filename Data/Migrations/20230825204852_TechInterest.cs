@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace kwiz_backend.Data.Migrations
+namespace Kwiz.Api.Data.Migrations
 {
     /// <inheritdoc />
     public partial class TechInterest : Migration
