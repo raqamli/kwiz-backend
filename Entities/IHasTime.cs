@@ -1,4 +1,4 @@
-namespace X.Kwiz.Api.Entities;
+namespace Kwiz.Api.Entities;
 public interface IHasTime
 {
     DateTime CreatedAt { get; set; }

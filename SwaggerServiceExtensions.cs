@@ -1,6 +1,6 @@
 using Microsoft.OpenApi.Models;
 
-namespace X.Kwiz.Api;
+namespace Kwiz.Api;
 
 public static class SwaggerServiceExtensions
 {

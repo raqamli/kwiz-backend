@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using X.Kwiz.Api;
-using X.Kwiz.Api.Data;
+using Kwiz.Api;
+using Kwiz.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

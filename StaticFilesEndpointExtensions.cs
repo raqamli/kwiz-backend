@@ -1,6 +1,6 @@
 using Microsoft.Extensions.FileProviders;
 
-namespace X.Kwiz.Api;
+namespace Kwiz.Api;
 
 public static class StaticFilesEndpointExtensions
 {

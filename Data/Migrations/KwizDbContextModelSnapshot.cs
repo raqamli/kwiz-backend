@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using X.Kwiz.Api.Data;
+using Kwiz.Api.Data;
 
 #nullable disable
 
-namespace kwiz_backend.Data.Migrations
+namespace Kwiz.Api.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
     partial class KwizDbContextModelSnapshot : ModelSnapshot

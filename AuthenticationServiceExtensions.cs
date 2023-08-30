@@ -1,7 +1,7 @@
 using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 
-namespace X.Kwiz.Api;
+namespace Kwiz.Api;
 
 public static class AuthenticationServiceExtensions
 {
