@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using X.Kwiz.Api.Entities;
+using Kwiz.Api.Entities;
 
-namespace X.Kwiz.Api.Data.Configurations;
+namespace Kwiz.Api.Data.Configurations;
 
 public class TechnologiesConfigurationMap : IEntityTypeConfiguration<Technologies>
 {

@@ -1,4 +1,4 @@
-namespace X.Kwiz.Api.Entities;
+namespace Kwiz.Api.Entities;
 public class QuizQuestion
 {
     public Guid Id { get; set; }

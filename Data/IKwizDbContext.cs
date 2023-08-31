@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using X.Kwiz.Api.Entities;
+using Kwiz.Api.Entities;
 
-namespace X.Kwiz.Api.Data;
+namespace Kwiz.Api.Data;
 public interface IKwizDbContext
 {
     DbSet<TechInterest> TechInterests { get; set; }

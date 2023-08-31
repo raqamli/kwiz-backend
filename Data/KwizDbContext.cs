@@ -1,9 +1,9 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using X.Kwiz.Api.Entities;
+using Kwiz.Api.Entities;
 
-namespace X.Kwiz.Api.Data;
+namespace Kwiz.Api.Data;
 
 public class KwizDbContext : DbContext, IKwizDbContext
 {

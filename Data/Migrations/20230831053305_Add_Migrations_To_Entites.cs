@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace kwiz_backend.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Migratation : Migration
+    public partial class Add_Migrations_To_Entites : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
