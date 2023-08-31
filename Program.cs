@@ -5,6 +5,7 @@ using Kwiz.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpClient();
 builder.Services.AddDbContext<IKwizDbContext, KwizDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 builder.Services.AddSwaggerDocumentation(builder.Configuration);
 builder.Services.AddKeycloakAuthenticationServices(builder.Configuration);
