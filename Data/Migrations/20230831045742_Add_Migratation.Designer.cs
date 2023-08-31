@@ -12,7 +12,7 @@ using X.Kwiz.Api.Data;
 namespace kwiz_backend.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
-    [Migration("20230831043746_Add_Migratation")]
+    [Migration("20230831045742_Add_Migratation")]
     partial class Add_Migratation
     {
         /// <inheritdoc />

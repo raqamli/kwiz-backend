@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using X.Kwiz.Api.Entities;
 
 namespace X.Kwiz.Api.Data.Configurations;
-public class TechInterestConfigurationMap : IEntityTypeConfiguration<TechInterest>
+public class TechInterestConfiguration : IEntityTypeConfiguration<TechInterest>
 {
     public void Configure(EntityTypeBuilder<TechInterest> builder)
     {
