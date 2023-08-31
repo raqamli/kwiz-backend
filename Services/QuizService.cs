@@ -43,7 +43,6 @@ public class QuizService : IQuizService
 
         var content = await httpResponce.Content.ReadAsStringAsync();
         var quizzes = JsonConvert.DeserializeObject<List<Quiz>>(content);
-
         return quizzes;
     }
 
