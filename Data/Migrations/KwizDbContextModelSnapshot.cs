@@ -22,6 +22,21 @@ namespace kwiz_backend.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("QuizQuizQuestion", b =>
+                {
+                    b.Property<Guid>("QuestionsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("QuizzesId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("QuestionsId", "QuizzesId");
+
+                    b.HasIndex("QuizzesId");
+
+                    b.ToTable("QuizQuizQuestion", (string)null);
+                });
+
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuestionOption", b =>
                 {
                     b.Property<Guid>("Id")
@@ -88,6 +103,9 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("QuizQuetionId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
@@ -128,8 +146,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizId");
 
                     b.ToTable("QuizQuestions");
                 });
@@ -232,6 +248,21 @@ namespace kwiz_backend.Data.Migrations
                     b.ToTable("Technologies");
                 });
 
+            modelBuilder.Entity("QuizQuizQuestion", b =>
+                {
+                    b.HasOne("X.Kwiz.Api.Entities.QuizQuestion", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("X.Kwiz.Api.Entities.Quiz", null)
+                        .WithMany()
+                        .HasForeignKey("QuizzesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuestionOption", b =>
                 {
                     b.HasOne("X.Kwiz.Api.Entities.QuizQuestion", "Question")
@@ -251,17 +282,6 @@ namespace kwiz_backend.Data.Migrations
                     b.Navigation("SubmissionSelection");
                 });
 
-            modelBuilder.Entity("X.Kwiz.Api.Entities.QuizQuestion", b =>
-                {
-                    b.HasOne("X.Kwiz.Api.Entities.Quiz", "Quiz")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Quiz");
-                });
-
             modelBuilder.Entity("X.Kwiz.Api.Entities.SubmissionSelection", b =>
                 {
                     b.HasOne("X.Kwiz.Api.Entities.Submission", "Submission")
@@ -271,11 +291,6 @@ namespace kwiz_backend.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Submission");
-                });
-
-            modelBuilder.Entity("X.Kwiz.Api.Entities.Quiz", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuizQuestion", b =>

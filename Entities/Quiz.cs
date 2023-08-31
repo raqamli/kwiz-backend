@@ -14,4 +14,5 @@ public class Quiz : IHasTime
     public string[] Tags { get; set; }
     public string Code { get; set; }
     public List<QuizQuestion> Questions { get; set; }
+    public Guid QuizQuetionId { get; set; }
 }

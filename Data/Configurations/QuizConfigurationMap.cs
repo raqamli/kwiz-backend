@@ -13,8 +13,8 @@ public class QuizConfigurationMap : IEntityTypeConfiguration<Quiz>
         builder.Property(b => b.Description).HasMaxLength(1024).IsRequired();
 
         builder.HasMany(b => b.Questions)
-            .WithOne(b => b.Quiz)
-            .HasForeignKey(b => b.QuizId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .WithMany(b => b.Quizzes)
+            .UsingEntity(j => j.ToTable("QuizQuizQuestion"));
+            
     }
 }

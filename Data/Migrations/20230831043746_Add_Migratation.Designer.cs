@@ -12,8 +12,8 @@ using X.Kwiz.Api.Data;
 namespace kwiz_backend.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
-    [Migration("20230828172813_Add_Migrations_To_Entites")]
-    partial class Add_Migrations_To_Entites
+    [Migration("20230831043746_Add_Migratation")]
+    partial class Add_Migratation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace kwiz_backend.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("QuizQuizQuestion", b =>
+                {
+                    b.Property<Guid>("QuestionsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("QuizzesId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("QuestionsId", "QuizzesId");
+
+                    b.HasIndex("QuizzesId");
+
+                    b.ToTable("QuizQuizQuestion", (string)null);
+                });
 
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuestionOption", b =>
                 {
@@ -91,6 +106,9 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("QuizQuetionId")
+                        .HasColumnType("uuid");
+
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
@@ -131,8 +149,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuizId");
 
                     b.ToTable("QuizQuestions");
                 });
@@ -235,6 +251,21 @@ namespace kwiz_backend.Data.Migrations
                     b.ToTable("Technologies");
                 });
 
+            modelBuilder.Entity("QuizQuizQuestion", b =>
+                {
+                    b.HasOne("X.Kwiz.Api.Entities.QuizQuestion", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("X.Kwiz.Api.Entities.Quiz", null)
+                        .WithMany()
+                        .HasForeignKey("QuizzesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuestionOption", b =>
                 {
                     b.HasOne("X.Kwiz.Api.Entities.QuizQuestion", "Question")
@@ -254,17 +285,6 @@ namespace kwiz_backend.Data.Migrations
                     b.Navigation("SubmissionSelection");
                 });
 
-            modelBuilder.Entity("X.Kwiz.Api.Entities.QuizQuestion", b =>
-                {
-                    b.HasOne("X.Kwiz.Api.Entities.Quiz", "Quiz")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Quiz");
-                });
-
             modelBuilder.Entity("X.Kwiz.Api.Entities.SubmissionSelection", b =>
                 {
                     b.HasOne("X.Kwiz.Api.Entities.Submission", "Submission")
@@ -274,11 +294,6 @@ namespace kwiz_backend.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Submission");
-                });
-
-            modelBuilder.Entity("X.Kwiz.Api.Entities.Quiz", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("X.Kwiz.Api.Entities.QuizQuestion", b =>

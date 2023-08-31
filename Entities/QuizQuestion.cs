@@ -6,6 +6,6 @@ public class QuizQuestion
     public string Content { get; set; }
     public List<QuestionOption> Options { get; set; }
     public string[] Tags { get; set; }
-    public Quiz Quiz { get; set; }
+    public List<Quiz> Quizzes { get; set; }
     public Guid QuizId { get; set; }
 }
