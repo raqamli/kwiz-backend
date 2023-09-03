@@ -1,5 +1,7 @@
 namespace Kwiz.Api.Entities;
+
 public class Quiz : IHasTime
+
 {
     public Guid Id { get; set; }
     public Guid OwnerId { get; set;}

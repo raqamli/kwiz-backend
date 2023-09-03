@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace kwiz_backend.Data.Migrations
+namespace Kwiz.Api.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
     partial class KwizDbContextModelSnapshot : ModelSnapshot

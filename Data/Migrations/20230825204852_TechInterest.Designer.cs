@@ -9,7 +9,7 @@ using Kwiz.Api.Data;
 
 #nullable disable
 
-namespace kwiz_backend.Data.Migrations
+namespace Kwiz.Api.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
     [Migration("20230825204852_TechInterest")]
