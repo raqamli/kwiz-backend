@@ -8,6 +8,11 @@ public class SubmissionSelectionConfigurationMap : IEntityTypeConfiguration<Subm
 {
     public void Configure(EntityTypeBuilder<SubmissionSelection> builder)
     {
-        builder.HasKey(b => b.Id);        
+        builder.HasKey(b => b.Id);
+
+        builder.HasOne(b => b.Question)
+            .WithOne(b => b.SubmissionSelection)
+            .HasForeignKey<QuizQuestion>(b => b.SubmissionSelectionId)
+            .IsRequired();        
     }
 }

@@ -15,9 +15,5 @@ public class QuizQuestionConfigurationMap : IEntityTypeConfiguration<QuizQuestio
             .WithOne(b => b.Question)
             .HasForeignKey(b => b.QuestionId)
             .IsRequired();
-        
-        builder.HasOne(b => b.SubmissionSelection)
-            .WithOne(b => b.Question)
-            .HasForeignKey<SubmissionSelection>(b => b.QuestionId);
     }
 }

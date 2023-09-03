@@ -2,6 +2,7 @@ namespace Kwiz.Api.Entities;
 public class QuizQuestion
 {
     public Guid Id { get; set; }
+    public Guid SubmissionSelectionId { get; set; }
     public int TimeLimitSeconds { get; set; }
     public string Content { get; set; }
     public string[] Tags { get; set; }
