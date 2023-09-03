@@ -11,8 +11,8 @@ public class SubmissionSelectionConfigurationMap : IEntityTypeConfiguration<Subm
         builder.HasKey(b => b.Id);
 
         builder.HasOne(b => b.Question)
-            .WithOne(b => b.SubmissionSelection)
-            .HasForeignKey<QuizQuestion>(b => b.SubmissionSelectionId)
+            .WithMany(b => b.SubmissionSelections)
+            .HasForeignKey(b => b.QuestionId)
             .IsRequired();        
     }
 }

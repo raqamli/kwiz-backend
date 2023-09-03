@@ -94,9 +94,6 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("SubmissionId")
-                        .HasColumnType("uuid");
-
                     b.Property<string[]>("Tags")
                         .HasColumnType("text[]");
 
@@ -109,9 +106,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubmissionId")
-                        .IsUnique();
 
                     b.ToTable("Quizzes");
                 });
@@ -127,9 +121,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("character varying(1024)");
 
-                    b.Property<Guid>("SubmissionSelectionId")
-                        .HasColumnType("uuid");
-
                     b.Property<string[]>("Tags")
                         .HasColumnType("text[]");
 
@@ -137,9 +128,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("SubmissionSelectionId")
-                        .IsUnique();
 
                     b.ToTable("QuizQuestions");
                 });
@@ -164,6 +152,8 @@ namespace kwiz_backend.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("QuizId");
+
                     b.ToTable("Submissions");
                 });
 
@@ -186,6 +176,8 @@ namespace kwiz_backend.Data.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
 
                     b.HasIndex("SubmissionId");
 
@@ -271,33 +263,30 @@ namespace kwiz_backend.Data.Migrations
                     b.Navigation("SubmissionSelection");
                 });
 
-            modelBuilder.Entity("Kwiz.Api.Entities.Quiz", b =>
+            modelBuilder.Entity("Kwiz.Api.Entities.Submission", b =>
                 {
-                    b.HasOne("Kwiz.Api.Entities.Submission", "Submission")
-                        .WithOne("Quiz")
-                        .HasForeignKey("Kwiz.Api.Entities.Quiz", "SubmissionId")
+                    b.HasOne("Kwiz.Api.Entities.Quiz", "Quiz")
+                        .WithMany("Submissions")
+                        .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Submission");
-                });
-
-            modelBuilder.Entity("Kwiz.Api.Entities.QuizQuestion", b =>
-                {
-                    b.HasOne("Kwiz.Api.Entities.SubmissionSelection", "SubmissionSelection")
-                        .WithOne("Question")
-                        .HasForeignKey("Kwiz.Api.Entities.QuizQuestion", "SubmissionSelectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SubmissionSelection");
+                    b.Navigation("Quiz");
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.SubmissionSelection", b =>
                 {
+                    b.HasOne("Kwiz.Api.Entities.QuizQuestion", "Question")
+                        .WithMany("SubmissionSelections")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Kwiz.Api.Entities.Submission", null)
                         .WithMany("Selections")
                         .HasForeignKey("SubmissionId");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("QuizQuizQuestion", b =>
@@ -315,22 +304,25 @@ namespace kwiz_backend.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Kwiz.Api.Entities.Quiz", b =>
+                {
+                    b.Navigation("Submissions");
+                });
+
             modelBuilder.Entity("Kwiz.Api.Entities.QuizQuestion", b =>
                 {
                     b.Navigation("Options");
+
+                    b.Navigation("SubmissionSelections");
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.Submission", b =>
                 {
-                    b.Navigation("Quiz");
-
                     b.Navigation("Selections");
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.SubmissionSelection", b =>
                 {
-                    b.Navigation("Question");
-
                     b.Navigation("SelectedOptions");
                 });
 #pragma warning restore 612, 618
