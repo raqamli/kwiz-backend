@@ -10,5 +10,14 @@ public class QuizQuestionConfigurationMap : IEntityTypeConfiguration<QuizQuestio
     {
         builder.HasKey(b => b.Id);
         builder.Property(b => b.Content).HasMaxLength(1024).IsRequired();
+        
+        builder.HasMany(b => b.Options)
+            .WithOne(b => b.Question)
+            .HasForeignKey(b => b.QuestionId)
+            .IsRequired();
+        
+        builder.HasOne(b => b.SubmissionSelection)
+            .WithOne(b => b.Question)
+            .HasForeignKey<SubmissionSelection>(b => b.QuestionId);
     }
 }

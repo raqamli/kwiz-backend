@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace kwiz_backend.Data.Migrations
 {
     [DbContext(typeof(KwizDbContext))]
-    [Migration("20230831053305_Add_Migrations_To_Entites")]
+    [Migration("20230903144620_Add_Migrations_To_Entites")]
     partial class Add_Migrations_To_Entites
     {
         /// <inheritdoc />
@@ -53,11 +53,14 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<Guid>("SubmissionId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("SubmissionSelectionId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
 
-                    b.HasIndex("SubmissionId");
+                    b.HasIndex("SubmissionSelectionId");
 
                     b.ToTable("QuestionOptions");
                 });
@@ -91,9 +94,6 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("QuizQuetionId")
-                        .HasColumnType("uuid");
-
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
@@ -124,9 +124,6 @@ namespace kwiz_backend.Data.Migrations
                         .HasMaxLength(1024)
                         .HasColumnType("character varying(1024)");
 
-                    b.Property<Guid>("QuizId")
-                        .HasColumnType("uuid");
-
                     b.Property<string[]>("Tags")
                         .HasColumnType("text[]");
 
@@ -156,10 +153,10 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<DateTime>("StartedDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("SubmissionId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("QuizId")
+                        .IsUnique();
 
                     b.ToTable("Submissions");
                 });
@@ -176,13 +173,16 @@ namespace kwiz_backend.Data.Migrations
                     b.Property<Guid>("QuestionId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("SubmissionId")
+                    b.Property<Guid?>("SubmissionId")
                         .HasColumnType("uuid");
 
                     b.Property<int>("TimeSpentOnQuestion")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId")
+                        .IsUnique();
 
                     b.HasIndex("SubmissionId");
 
@@ -261,24 +261,37 @@ namespace kwiz_backend.Data.Migrations
 
                     b.HasOne("Kwiz.Api.Entities.SubmissionSelection", "SubmissionSelection")
                         .WithMany("SelectedOptions")
-                        .HasForeignKey("SubmissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubmissionSelectionId");
 
                     b.Navigation("Question");
 
                     b.Navigation("SubmissionSelection");
                 });
 
-            modelBuilder.Entity("Kwiz.Api.Entities.SubmissionSelection", b =>
+            modelBuilder.Entity("Kwiz.Api.Entities.Submission", b =>
                 {
-                    b.HasOne("Kwiz.Api.Entities.Submission", "Submission")
-                        .WithMany("Selections")
-                        .HasForeignKey("SubmissionId")
+                    b.HasOne("Kwiz.Api.Entities.Quiz", "Quiz")
+                        .WithOne("Submission")
+                        .HasForeignKey("Kwiz.Api.Entities.Submission", "QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Submission");
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("Kwiz.Api.Entities.SubmissionSelection", b =>
+                {
+                    b.HasOne("Kwiz.Api.Entities.QuizQuestion", "Question")
+                        .WithOne("SubmissionSelection")
+                        .HasForeignKey("Kwiz.Api.Entities.SubmissionSelection", "QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kwiz.Api.Entities.Submission", null)
+                        .WithMany("Selections")
+                        .HasForeignKey("SubmissionId");
+
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("QuizQuizQuestion", b =>
@@ -296,9 +309,16 @@ namespace kwiz_backend.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Kwiz.Api.Entities.Quiz", b =>
+                {
+                    b.Navigation("Submission");
+                });
+
             modelBuilder.Entity("Kwiz.Api.Entities.QuizQuestion", b =>
                 {
                     b.Navigation("Options");
+
+                    b.Navigation("SubmissionSelection");
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.Submission", b =>

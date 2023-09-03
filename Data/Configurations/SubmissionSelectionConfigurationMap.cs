@@ -8,11 +8,6 @@ public class SubmissionSelectionConfigurationMap : IEntityTypeConfiguration<Subm
 {
     public void Configure(EntityTypeBuilder<SubmissionSelection> builder)
     {
-        builder.HasKey(b => b.Id);
-
-        builder.HasMany(b => b.SelectedOptions)
-            .WithOne(b => b.SubmissionSelection)
-            .HasForeignKey(b => b.SubmissionId)
-            .OnDelete(DeleteBehavior.Cascade);
+        builder.HasKey(b => b.Id);        
     }
 }

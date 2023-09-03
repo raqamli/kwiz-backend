@@ -9,10 +9,5 @@ public class SubmissionConfigurationMap : IEntityTypeConfiguration<Submission>
     public void Configure(EntityTypeBuilder<Submission> builder)
     {
         builder.HasKey(b => b.Id);
-
-        builder.HasMany(b => b.Selections)
-            .WithOne(b => b.Submission)
-            .HasForeignKey(b => b.SubmissionId)
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

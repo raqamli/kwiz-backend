@@ -15,6 +15,10 @@ public class QuizConfigurationMap : IEntityTypeConfiguration<Quiz>
         builder.HasMany(b => b.Questions)
             .WithMany(b => b.Quizzes)
             .UsingEntity(j => j.ToTable("QuizQuizQuestion"));
-            
+        
+        builder.HasOne(b => b.Submission)
+            .WithOne(b => b.Quiz)
+            .HasForeignKey<Submission>(b => b.QuizId)
+            .IsRequired();
     }
 }
