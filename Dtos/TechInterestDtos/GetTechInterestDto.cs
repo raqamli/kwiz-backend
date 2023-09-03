@@ -1,4 +1,3 @@
-
 using Kwiz.Api.Entities;
 
 namespace Kwiz.Api.Dtos.TechInterestDto;

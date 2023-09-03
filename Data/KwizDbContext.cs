@@ -14,6 +14,12 @@ public class KwizDbContext : DbContext, IKwizDbContext
     }
 
     public DbSet<TechInterest> TechInterests { get; set; }
+    public DbSet<Submission> Submissions { get; set; }
+    public DbSet<SubmissionSelection> SubmissionSelections { get; set; }
+    public DbSet<Quiz> Quizzes { get; set; }
+    public DbSet<QuizQuestion> QuizQuestions { get; set; }
+    public DbSet<QuestionOption> QuestionOptions { get; set; }
+    public DbSet<Technologies> Technologies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

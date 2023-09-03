@@ -1,7 +1,8 @@
 namespace Kwiz.Api.Entities;
 public class Technologies
 {
-    public string type { get; set; } 
+    public Guid Id { get; set; }
+    public string Type { get; set; } 
     public string Name { get; set; }
     public string Description { get; set; }
 }
