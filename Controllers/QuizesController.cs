@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Kwiz.Api.Data;
 using Kwiz.Api.Dtos;
+using Kwiz.Api.Dtos.QuestionOptionDtos;
 using Kwiz.Api.Dtos.QuizDtos;
 using Kwiz.Api.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -94,7 +95,7 @@ public class QuizesController : ControllerBase
         if ((false == await dbContext.Quizzes.AnyAsync(q => q.Status != EQuizStatus.Deleted && q.OwnerId == userId
             && q.Id == id, cancellationToken)))
             return BadRequest("Quiz not with this id.");
-
+        
         var quiz = await dbContext.Quizzes.FirstOrDefaultAsync(q => q.Id == id && q.OwnerId == userId, cancellationToken);
         return Ok(new GetQuizDto(quiz));
     }
@@ -166,10 +167,10 @@ public class QuizesController : ControllerBase
             .Where(q => q.Id == id && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(quiz == null)
+
+        if (quiz == null)
             return BadRequest("Quiz not found.");
-        
+
         var questions = quizQuestions.Select(q => new QuizQuestion
         {
             TimeLimitSeconds = q.TimeLimitSeconds,
@@ -199,10 +200,10 @@ public class QuizesController : ControllerBase
             .Where(q => q.Id == id && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(quiz == null)
+
+        if (quiz == null)
             return BadRequest("Quiz not found.");
-        
+
         var question = new QuizQuestion
         {
             TimeLimitSeconds = quizQuestion.TimeLimitSeconds,
@@ -234,13 +235,22 @@ public class QuizesController : ControllerBase
             .Where(q => q.Id == id && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(quiz == null)
+
+        if (quiz == null)
             return BadRequest("Quiz not found.");
 
-        var questions = quiz.Questions.ToList();
+        if (false == string.IsNullOrWhiteSpace(search))
+            quiz.Questions = quiz.Questions.Where(q => q.Content.Contains(search)).ToList();
 
-        return Ok(questions.Select(q => new GetQuizQuestionDto(q)));
+        var quizpaginated = quiz.Questions
+            .Skip(offset * limit)
+            .Take(limit)
+            .Select(q => new GetQuizQuestionDto(q))
+            .ToList();
+
+        var result = new PaginatedList<GetQuizQuestionDto>(quizpaginated, quiz.Questions.Count(), offset + 1, limit);
+
+        return Ok(result);
     }
 
     [Authorize]
@@ -259,13 +269,13 @@ public class QuizesController : ControllerBase
             .Where(q => q.Id == quizId && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(quiz == null)
+
+        if (quiz == null)
             return BadRequest("Quiz not found.");
 
         var question = quiz.Questions.FirstOrDefault(q => q.Id == questionId);
 
-        if(question == null)
+        if (question == null)
             return BadRequest("Question not found.");
 
         question.TimeLimitSeconds = quizQuestion.TimeLimitSeconds;
@@ -292,21 +302,169 @@ public class QuizesController : ControllerBase
             .Where(q => q.Id == quizId && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if(quiz == null)
+
+        if (quiz == null)
             return BadRequest("Quiz not found.");
-        
+
         var question = quiz.Questions.FirstOrDefault(q => q.Id == questionId);
 
-        if(question == null)
+        if (question == null)
             return BadRequest("Question not found.");
-        
+
         quiz.Questions.Remove(question);
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return Ok();
     }
 
+    [Authorize]
+    [HttpPost("{questionId}/questionOptions")]
+    public async Task<IActionResult> CreateQuizQuestionOptions(
+        [FromServices] IKwizDbContext dbContext,
+        [FromRoute] Guid questionId,
+        [FromBody] IEnumerable<CreateQuestionOptionDto> options,
+        CancellationToken cancellationToken = default)
+    {
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idCliam);
+
+        var question = await dbContext.QuizQuestions
+            .Where(q => q.Id == questionId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (question == null)
+            return BadRequest("Question not found.");
+
+        var questionoptions = question.Options = options.Select(o => new QuestionOption
+        {
+            QuestionId = questionId,
+            SubmissionId = o.SubmissionId,
+            Content = o.Content,
+            IsCorrect = o.IsCorrect,
+            IsRequired = o.IsRequired,
+            Explanation = o.Explanation
+        }).ToList();
+        dbContext.QuestionOptions.AddRange(questionoptions);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return Ok(questionoptions.Select(o => new GetQuestionOptionDto(o)));
+    }
+    
+    [Authorize]
+    [HttpPost("{questionId}/questionOption")]
+    public async Task<IActionResult> CreateQuizQuestionOption(
+        [FromServices] IKwizDbContext dbContext,
+        [FromRoute] Guid questionId,
+        [FromBody] CreateQuestionOptionDto option,
+        CancellationToken cancellationToken = default)
+    {
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idCliam);
+
+        var question = await dbContext.QuizQuestions
+            .Where(q => q.Id == questionId)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (question == null)
+            return BadRequest("Question not found.");
+
+        var questionOption = new QuestionOption
+        {
+            QuestionId = questionId,
+            SubmissionId = option.SubmissionId,
+            Content = option.Content,
+            IsCorrect = option.IsCorrect,
+            IsRequired = option.IsRequired,
+            Explanation = option.Explanation
+        };
+        question.Options.Add(questionOption);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        return Ok(new GetQuestionOptionDto(questionOption));
+    }
+
+    [Authorize]
+    [HttpGet("{questionId}/questionOptions")]
+    public async Task<IActionResult> GetQuizQuestionOptions(
+        [FromServices] IKwizDbContext dbContext,
+        [FromRoute] Guid questionId,
+        CancellationToken cancellationToken = default)
+    {
+        var question = await dbContext.QuizQuestions
+            .Where(q => q.Id == questionId)
+            .Include(q => q.Options)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (question == null)
+            return BadRequest("Question not found.");
+        
+        if(false == question.Options.Any())
+            return BadRequest("questionOptions not found.");
+
+        return Ok(question.Options.Select(o => new GetQuestionOptionDto(o)));
+    }
+
+    [Authorize]
+    [HttpPut("{questionId}/questionOptions/{id}")]
+    public async Task<IActionResult> UpdateQuizQuestionOption(
+        [FromServices] IKwizDbContext dbContext,
+        [FromRoute] Guid questionId,
+        [FromRoute] Guid id,
+        [FromBody] UpdateQuestionOptionDto option,
+        CancellationToken cancellationToken = default)
+    {
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idCliam);
+
+        var question = await dbContext.QuizQuestions
+            .Where(q => q.Id == questionId)
+            .Include(q => q.Options)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (question == null)
+            return BadRequest("Question not found.");
+
+        var questionOption = question.Options.FirstOrDefault(o => o.Id == id);
+        if (questionOption == null)
+            return BadRequest("Option not found.");
+
+        questionOption.SubmissionId = option.SubmissionId;
+        questionOption.Content = option.Content;
+        questionOption.IsCorrect = option.IsCorrect;
+        questionOption.IsRequired = option.IsRequired;
+        questionOption.Explanation = option.Explanation;
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return Ok(new GetQuestionOptionDto(questionOption));
+    }
+
+    [Authorize]
+    [HttpDelete("{questionId}/questionOptions/{id}")]
+    public async Task<IActionResult> DeleteQuizQuestionOption(
+        [FromServices] IKwizDbContext dbContext,
+        [FromRoute] Guid questionId,
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userId = Guid.Parse(idCliam);
+
+        var question = await dbContext.QuizQuestions
+            .Where(q => q.Id == questionId)
+            .Include(q => q.Options)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (question == null)
+            return BadRequest("Question not found.");
+
+        var questionOption = question.Options.FirstOrDefault(o => o.Id == id);
+        if (questionOption == null)
+            return BadRequest("Option not found.");
+
+        question.Options.Remove(questionOption);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        return Ok(new GetQuestionOptionDto(questionOption));
+    }
+    
     private EQuizStatus ToEnum(EQuizStatusDto dto)
     {
         return (EQuizStatus)dto;
