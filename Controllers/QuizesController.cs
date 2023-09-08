@@ -165,7 +165,6 @@ public class QuizesController : ControllerBase
         var quiz = await dbContext.Quizzes
             .Where(q => q.Id == id && q.OwnerId == userId && q.Status != EQuizStatus.Deleted)
             .Include(q => q.Questions)
-            .ThenInclude(q => q.Quizzes)
             .FirstOrDefaultAsync(cancellationToken);
         
         if(quiz == null)
@@ -173,7 +172,6 @@ public class QuizesController : ControllerBase
         
         var questions = quizQuestions.Select(q => new QuizQuestion
         {
-            Id = Guid.NewGuid(),
             TimeLimitSeconds = q.TimeLimitSeconds,
             Content = q.Content,
             Tags = q.Tags
@@ -207,7 +205,6 @@ public class QuizesController : ControllerBase
         
         var question = new QuizQuestion
         {
-            Id = Guid.NewGuid(),
             TimeLimitSeconds = quizQuestion.TimeLimitSeconds,
             Content = quizQuestion.Content,
             Tags = quizQuestion.Tags
