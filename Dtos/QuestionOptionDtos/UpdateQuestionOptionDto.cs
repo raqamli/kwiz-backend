@@ -1,7 +1,6 @@
 namespace Kwiz.Api.Dtos.QuestionOptionDtos;
 public class UpdateQuestionOptionDto
 {
-    public Guid QuestionId { get; set; }
     public Guid SubmissionId { get; set; }
     public string Content { get; set; }
     public bool IsCorrect { get; set; }
