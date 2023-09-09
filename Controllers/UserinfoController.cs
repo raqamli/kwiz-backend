@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Kwiz.Api.Data;
 using Kwiz.Api.Dtos.TechInterestDto;
 using Kwiz.Api.Entities;
+using Microsoft.Extensions.FileProviders;
 
 namespace Kwiz.Api.Controllers;
 
@@ -12,6 +13,12 @@ namespace Kwiz.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class UserinfoController : ControllerBase
 {
+    private readonly IFileProvider fileProvider;
+    public UserinfoController(IWebHostEnvironment environment)
+    {
+        this.fileProvider = new PhysicalFileProvider(Path.Combine(environment.ContentRootPath,"StaticFiles"));
+    }
+    
     [Authorize]
     [HttpGet("interests")]
     public async Task<IActionResult> GetUserInterests(
@@ -79,5 +86,36 @@ public class UserinfoController : ControllerBase
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return Ok(new GetTechInterestDto(interests));
+    }
+
+    [Authorize]
+    [HttpGet("technologies")]
+    public IActionResult GetTechnologies()
+    {
+        var filePath = fileProvider.GetFileInfo("technologies.json");
+
+        if(!filePath.Exists)
+          {
+            return NotFound("Technologies files not found!");
+          }
+        try
+          {
+            using(var stream = filePath.CreateReadStream())
+            using(var reader = new StreamReader(stream))
+              {
+                var jsonContent = reader.ReadToEnd();
+                var technologies = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Technologies>>(jsonContent);
+
+                if(technologies is null)
+                  {
+                    return BadRequest("Invalid Json format in the technologies file");
+                  };
+                return Ok(technologies);
+              }
+          }
+        catch(Exception ex)
+          {
+            return StatusCode(500,$"An error occured: {ex.Message}");
+          }
     }
 }

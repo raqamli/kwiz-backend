@@ -59,7 +59,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasIndex("SubmissionSelectionId");
 
-                    b.ToTable("QuestionOptions");
+                    b.ToTable("QuestionOptions", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.Quiz", b =>
@@ -107,7 +107,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Quizzes");
+                    b.ToTable("Quizzes", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.QuizQuestion", b =>
@@ -129,7 +129,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuizQuestions");
+                    b.ToTable("QuizQuestions", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.Submission", b =>
@@ -154,7 +154,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Submissions");
+                    b.ToTable("Submissions", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.SubmissionSelection", b =>
@@ -181,7 +181,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasIndex("SubmissionId");
 
-                    b.ToTable("SubmissionSelections");
+                    b.ToTable("SubmissionSelections", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.TechInterest", b =>
@@ -202,7 +202,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("TechInterests");
+                    b.ToTable("TechInterests", (string)null);
                 });
 
             modelBuilder.Entity("Kwiz.Api.Entities.Technologies", b =>
@@ -228,7 +228,7 @@ namespace Kwiz.Api.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Technologies");
+                    b.ToTable("Technologies", (string)null);
                 });
 
             modelBuilder.Entity("QuizQuizQuestion", b =>

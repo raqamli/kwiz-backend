@@ -22,7 +22,11 @@ public static class AuthenticationServiceExtensions
             {
                 b.RequireResourceRoles("kwiz.admin");
             }))
-            .AddKeycloakAuthorization(authorizationOptions);
+            .AddAuthorization(o => o.AddPolicy("KwizUsersOnly", b =>
+            {
+                b.RequireResourceRoles("kwiz.user");
+            }))
+            .AddKeycloakAuthorization(authorizationOptions);        
 
         return services;
     }
