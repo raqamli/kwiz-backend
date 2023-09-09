@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Kwiz.Api.Controllers;
 public partial class QuizesController : ControllerBase
 {
-    
+
     [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateQuiz(

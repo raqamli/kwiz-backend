@@ -143,5 +143,5 @@ public partial class SubmissionsController : ControllerBase
         await dbContext.SaveChangesAsync(cancellationToken);
         return Ok();
     }
-    
+
 }

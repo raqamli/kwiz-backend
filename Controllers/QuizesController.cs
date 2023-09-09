@@ -1,7 +1,6 @@
 using System.Security.Claims;
 using Kwiz.Api.Data;
 using Kwiz.Api.Dtos;
-using Kwiz.Api.Dtos.QuestionOptionDtos;
 using Kwiz.Api.Dtos.QuizDtos;
 using Kwiz.Api.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -95,7 +94,7 @@ public partial class QuizesController : ControllerBase
         if ((false == await dbContext.Quizzes.AnyAsync(q => q.Status != EQuizStatus.Deleted && q.OwnerId == userId
             && q.Id == id, cancellationToken)))
             return BadRequest("Quiz not with this id.");
-        
+
         var quiz = await dbContext.Quizzes.FirstOrDefaultAsync(q => q.Id == id && q.OwnerId == userId, cancellationToken);
         return Ok(new GetQuizDto(quiz));
     }

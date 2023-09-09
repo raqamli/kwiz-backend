@@ -1,8 +1,6 @@
 using System.Security.Claims;
 using Kwiz.Api.Data;
-using Kwiz.Api.Dtos;
 using Kwiz.Api.Dtos.QuestionOptionDtos;
-using Kwiz.Api.Dtos.QuizDtos;
 using Kwiz.Api.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +41,7 @@ public partial class QuizesController : ControllerBase
 
         return Ok(questionoptions.Select(o => new GetQuestionOptionDto(o)));
     }
-    
+
     [Authorize]
     [HttpPost("{questionId}/questionOption")]
     public async Task<IActionResult> CreateQuizQuestionOption(
@@ -90,8 +88,8 @@ public partial class QuizesController : ControllerBase
 
         if (question == null)
             return BadRequest("Question not found.");
-        
-        if(false == question.Options.Any())
+
+        if (false == question.Options.Any())
             return BadRequest("questionOptions not found.");
 
         return Ok(question.Options.Select(o => new GetQuestionOptionDto(o)));
