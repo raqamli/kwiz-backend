@@ -10,6 +10,6 @@ public interface IKwizDbContext
     DbSet<Quiz> Quizzes { get; set; }
     DbSet<QuizQuestion> QuizQuestions { get; set; }
     DbSet<QuestionOption> QuestionOptions { get; set; }
-    DbSet<Technologies> Technologies { get; set; }
+    DbSet<Technology> Technologies { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

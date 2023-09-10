@@ -5,11 +5,11 @@ public class GetTechInterestDto
 {
     public GetTechInterestDto(TechInterest entity)
     {
-        Interests = entity.Interests;
+        InterestedTechnologies = entity.InterestedTechnologies.Select(t => new TechnologyDto(t)).ToList();
         CreatedAt = entity.CreatedAt;
         UpdatedAt = entity.UpdatedAt;
     }
-    public string[] Interests { get; set; }
+    public IEnumerable<TechnologyDto> InterestedTechnologies { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

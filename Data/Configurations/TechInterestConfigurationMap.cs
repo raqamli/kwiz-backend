@@ -8,6 +8,7 @@ public class TechInterestConfiguration : IEntityTypeConfiguration<TechInterest>
     public void Configure(EntityTypeBuilder<TechInterest> builder)
     {
         builder.HasKey(b => b.UserId);
-        builder.Property(b => b.Interests).IsRequired();
+        builder.HasMany(b => b.InterestedTechnologies)
+            .WithMany();
     }
 }

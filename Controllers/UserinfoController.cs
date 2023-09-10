@@ -40,25 +40,38 @@ public class UserinfoController : ControllerBase
     [HttpPost("interests")]
     public async Task<IActionResult> CreateInterest(
         [FromServices] IKwizDbContext dbContext,
-        [FromBody] IEnumerable<string> userSelectedInterests,
+        [FromBody] IEnumerable<Guid> userInterestedTechnologyIds,
         CancellationToken cancellationToken = default)
     {
-        if (userSelectedInterests.Any() is false)
+        if (userInterestedTechnologyIds.Any() is false)
             return BadRequest("User must select at least one interest.");
 
         var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         var userId = Guid.Parse(idCliam);
+
         var interests = await dbContext.TechInterests
-            .FirstOrDefaultAsync(t => t.UserId == userId, cancellationToken);
+            .Where(t => t.UserId == userId)
+            .Include(t => t.InterestedTechnologies)
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (interests is not null)
             return Conflict("User already has tech interests selected.");
 
+        var interestedTechnologies = await dbContext.Technologies
+            .Where(t => userInterestedTechnologyIds.Contains(t.Id))
+            .ToListAsync(cancellationToken);
+
+        if(interestedTechnologies.Count() != userInterestedTechnologyIds.Count())
+            return BadRequest("One or more selected technologies not found.");
+
         var persistedInterests = dbContext.TechInterests.Add(new TechInterest
         {
             UserId = userId,
-            Interests = userSelectedInterests.ToArray()
+            InterestedTechnologies = interestedTechnologies,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
         });
+
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return CreatedAtAction(nameof(GetUserInterests), new GetTechInterestDto(persistedInterests.Entity));
@@ -68,54 +81,34 @@ public class UserinfoController : ControllerBase
     [HttpPut("interests")]
     public async Task<IActionResult> UpdateInterest(
         [FromServices] IKwizDbContext dbContext,
-        [FromBody] IEnumerable<string> userSelectedInterests,
+        [FromBody] IEnumerable<Guid> userInterestedTechnologyIds,
         CancellationToken cancellationToken = default)
     {
-        if (userSelectedInterests.Any() is false)
+        if (userInterestedTechnologyIds.Any() is false)
             return BadRequest("User must select at least one interest.");
 
         var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         var userId = Guid.Parse(idCliam);
         var interests = await dbContext.TechInterests
-            .FirstOrDefaultAsync(t => t.UserId == userId, cancellationToken);
+            .Where(t => t.UserId == userId)
+            .Include(t => t.InterestedTechnologies)
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (interests is null)
-            BadRequest("User has never selected interests before.");
+            return BadRequest("User has never selected interests before.");
+
+        var interestedTechnologies = await dbContext.Technologies
+            .Where(t => userInterestedTechnologyIds.Contains(t.Id))
+            .ToListAsync(cancellationToken);
         
-        interests.Interests = userSelectedInterests.ToArray();
+        if(interestedTechnologies.Count() != userInterestedTechnologyIds.Count())
+            return BadRequest("One or more selected technologies not found.");
+        
+        interests.InterestedTechnologies.AddRange(interestedTechnologies);
+        interests.UpdatedAt = DateTime.UtcNow;
+
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return Ok(new GetTechInterestDto(interests));
-    }
-
-    [Authorize]
-    [HttpGet("technologies")]
-    public IActionResult GetTechnologies()
-    {
-        var filePath = fileProvider.GetFileInfo("technologies.json");
-
-        if(!filePath.Exists)
-          {
-            return NotFound("Technologies files not found!");
-          }
-        try
-          {
-            using(var stream = filePath.CreateReadStream())
-            using(var reader = new StreamReader(stream))
-              {
-                var jsonContent = reader.ReadToEnd();
-                var technologies = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Technologies>>(jsonContent);
-
-                if(technologies is null)
-                  {
-                    return BadRequest("Invalid Json format in the technologies file");
-                  };
-                return Ok(technologies);
-              }
-          }
-        catch(Exception ex)
-          {
-            return StatusCode(500,$"An error occured: {ex.Message}");
-          }
     }
 }
