@@ -11,8 +11,21 @@ builder.Services.AddKeycloakAuthenticationServices(builder.Configuration);
 builder.Services.AddControllers()
     .AddJsonOptions(config => config.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost",
+        builder =>
+        {
+            builder
+                .WithOrigins("http://localhost:3000", "https://localhost:3001") // Specify the allowed origins (http and https)
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
+app.UseCors("AllowLocalhost");
 app.UseSwaggerDocumentation();
 app.UseHttpsRedirection();
 app.UseAuthentication();

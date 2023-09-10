@@ -19,7 +19,7 @@ public class KwizDbContext : DbContext, IKwizDbContext
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<QuizQuestion> QuizQuestions { get; set; }
     public DbSet<QuestionOption> QuestionOptions { get; set; }
-    public DbSet<Technologies> Technologies { get; set; }
+    public DbSet<Technology> Technologies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
