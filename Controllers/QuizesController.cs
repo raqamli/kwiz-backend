@@ -22,6 +22,9 @@ public partial class QuizesController : ControllerBase
         var idCliam = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
         var userId = Guid.Parse(idCliam);
 
+        if(userId == Guid.Empty)
+            return BadRequest("User not found.");
+
         if (await dbContext.Quizzes.AnyAsync(q => q.Title == quiz.Title && q.OwnerId == userId, cancellationToken))
             return BadRequest("Quiz already exists with this Title.");
 
@@ -35,12 +38,12 @@ public partial class QuizesController : ControllerBase
             UpdatedAt = DateTime.UtcNow,
             OpeningDateTime = quiz.OpeningDateTime,
             ClosingDateTime = quiz.ClosingDateTime,
-            Status = ToEnum(quiz.Status),
+            Status = EQuizStatus.Active,
             IsPublic = quiz.IsPublic,
             Tags = quiz.Tags.ToArray(),
             Code = quiz.Code
         });
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await dbContext.SaveChangesAsync();
 
         return Ok(new GetQuizDto(persistedQuiz.Entity));
     }

@@ -63,7 +63,7 @@ public partial class QuizesController : ControllerBase
         var questionOption = new QuestionOption
         {
             QuestionId = questionId,
-            SubmissionId = option.SubmissionId,
+            SubmissionId = Guid.NewGuid(),
             Content = option.Content,
             IsCorrect = option.IsCorrect,
             IsRequired = option.IsRequired,

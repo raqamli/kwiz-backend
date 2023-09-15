@@ -228,4 +228,13 @@ public partial class QuizesController : ControllerBase
         return Ok();
     }
 
+    [Authorize]
+    [HttpGet("lastId")]
+    public async Task<IActionResult> GetQuestionsLastId(
+        [FromServices] IKwizDbContext dbContext,
+        CancellationToken cancellationToken = default)
+    {   
+        var questionId = await dbContext.QuizQuestions.OrderByDescending(q => q.Id).LastOrDefaultAsync(cancellationToken);
+        return Ok(questionId.Id);
+    }
 }
